@@ -13,7 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
 import java.util.Scanner;
-
+import java.util.Date;
+import java.util.Calendar;
 enum HealthTypes {
     Allergies,
     Behavioral,
@@ -54,8 +55,14 @@ class BehavioralHealth extends Health {
 }
 class Symptom {
     String symptom;
+    Date myDate;
     public Symptom(String s) {
         this.symptom = s;
+        myDate = new Date();
+    }
+    public Symptom(String s, Date date) {
+        this.symptom = s;
+        myDate = date;
     }
     public void updateSymptom(String s) {
         this.symptom = s;
