@@ -1,4 +1,5 @@
 import java.util.Date;
+import java.util.Scanner;
 
 /**
  * Write a description of interface Pet here.
@@ -12,7 +13,7 @@ public abstract class Pet
     String type;
     Date birthday;
     // #Object for healthlog log;
-    
+    Health myHealth;
     /**
      * Constructor for objects of class Pet
      * 
@@ -35,7 +36,17 @@ public abstract class Pet
     public void log(String date, String time, String healthLogType, String data) {
         // update the Object
     }
-    
+    public void setHealth() {
+        if (myHealth == null)
+            myHealth = new Health(this);
+        Scanner sc = new Scanner(System.in);
+        System.out.println("How is your pet feeling today?");
+        System.out.println("Healthy, Behavioral, or Allergies");
+        String health = sc.next();
+        sc.close();
+        HealthTypes healthType = HealthTypes.valueOf(health);
+
+    }
     /** 
      * public #Object display() {
      *     call a display to this pet's health log
