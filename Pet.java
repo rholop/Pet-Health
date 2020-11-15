@@ -36,20 +36,21 @@ public abstract class Pet
     public void log(String date, String time, String healthLogType, String data) {
         // update the Object
     }
-    public void setHealth() {
+    public void updateHealth(String health) {
         if (myHealth == null)
             myHealth = new Health(this);
-        Scanner sc = new Scanner(System.in);
-        System.out.println("How is your pet feeling today?");
-        System.out.println("Healthy, Behavioral, or Allergies");
-        String health = sc.next();
-        sc.close();
-        HealthTypes healthType = HealthTypes.valueOf(health);
-
+        myHealth.setHealth(health);
     }
-    /** 
-     * public #Object display() {
-     *     call a display to this pet's health log
-     * }
-    **/
+
+     public String toString() {
+         return name + ": " +"Type: " + type + " Birthday " + birthday;
+}
+public void display() {
+        if (myHealth == null)
+            System.out.println("Nothing to display");
+        else if (myHealth.getHealth() == HealthTypes.Healthy)
+            System.out.println(name + " is " + HealthTypes.Healthy);
+        else
+            System.out.println(name + " is suffering from " + myHealth.getHealth());
+}
 }
