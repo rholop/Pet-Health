@@ -1,7 +1,7 @@
 
 /**
  * Write a description of class Health here.
- *
+ * Stores a pet's symptoms
  * @author melmccord
  * @version 11/14/2020
  */
@@ -19,10 +19,15 @@ public class Health {
         myPet = p;
         symptoms = new ArrayList<Symptom>();
     }
-   public void addSymptom(String s) {
+   public void addSymptom(String s, String type) {
        symptoms.add(new Symptom(s));
-
    }
+   public void addSymptom(Symptom s) {
+    symptoms.add(s);
+    }
+   public void addSymptom(String s) {
+    symptoms.add(new Symptom(s));
+    }
     public List<Symptom> getHealth() {
         return symptoms;
     }
@@ -30,24 +35,28 @@ public class Health {
        return myPet.name + " " + symptoms;
    }
 }
-class BehavioralHealth extends Health {
-    private Pet p;
-    private List<Symptom> symptoms;
-    public BehavioralHealth(Pet p) {
-        super(p);
-    }
-    public void setHealth(String s) {
-        symptoms.add(new Symptom(s));
-    }
-    public List<Symptom> getSymptoms() {
-        return symptoms;
-    }
-}
+/**
+ * Class Symptom
+ * Stores the type of symptom, date entered or experienced and the type
+ * Used as part of the health main class
+ * @author melmccord
+ * @version 11/14/2020
+ */
 class Symptom {
+    String type;
     String symptom;
     Date myDate;
-    public Symptom(String s) {
-        this.symptom = s;
+    public Symptom(String symptom) {
+        this.type = "General";
+        this.symptom = symptom;
+        this.myDate = new Date();
+    }
+    public Symptom(String symptom, String type) {
+        this.symptom = symptom;
+        myDate = new Date();
+    }
+    public Symptom(String symptom, String type, Date date) {
+        this.symptom = symptom;
         myDate = new Date();
     }
     public Symptom(String s, Date date) {
@@ -56,12 +65,6 @@ class Symptom {
     }
     public void updateSymptom(String s) {
         this.symptom = s;
-    }
-    public void writeFile(String filename) throws IOException {
-        File file = new File(System.getProperty("user.dir") + "\\data\\"+ filename);
-        BufferedWriter bw = new BufferedWriter(new FileWriter(file));
-        bw.write(symptom + ",");
-        bw.close();
     }
     public String toString() {
         return "Symptom: " + symptom + " Date: " + myDate;

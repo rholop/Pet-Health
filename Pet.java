@@ -35,7 +35,13 @@ public abstract class Pet
      * @param
      */
     public void log(String date, String time, String healthLogType, String data) {
-        
+        Date myDate = new Date(date);
+        Symptom s = new Symptom(data, healthLogType, myDate);
+        this.myHealth.addSymptom(s);
+    }
+    public void log(String healthLogType, String data) {
+        Symptom s = new Symptom(data, healthLogType);
+        this.myHealth.addSymptom(s);
     }
     public void clearHealth() {
         myHealth = new Health(this);
