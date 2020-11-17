@@ -24,6 +24,7 @@ public abstract class Pet
         this.name = name;
         this.type = type;
         this.birthday = birthday;
+        this.myHealth = new Health(this);
         // log = new #Object();
         // generate an ID?
     }
@@ -34,23 +35,21 @@ public abstract class Pet
      * @param
      */
     public void log(String date, String time, String healthLogType, String data) {
-        // update the Object
+        
     }
-    public void updateHealth(String health) {
-        if (myHealth == null)
-            myHealth = new Health(this);
-        myHealth.setHealth(health);
+    public void clearHealth() {
+        myHealth = new Health(this);
     }
-
+    public void updateHealth(String s) {
+        this.myHealth.addSymptom(s);
+    }
      public String toString() {
          return name + ": " +"Type: " + type + " Birthday " + birthday;
 }
 public void display() {
-        if (myHealth == null)
-            System.out.println("Nothing to display");
-        else if (myHealth.getHealth() == HealthTypes.Healthy)
-            System.out.println(name + " is " + HealthTypes.Healthy);
-        else
-            System.out.println(name + " is suffering from " + myHealth.getHealth());
+    if (myHealth.symptoms.isEmpty())
+        System.out.println(name + " profile " + " has no recorded data.");
+    else
+        System.out.println(myHealth);
 }
 }

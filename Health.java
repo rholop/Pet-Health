@@ -9,36 +9,26 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.Date;
-import java.util.Scanner;
-import java.util.Date;
-import java.util.Calendar;
-enum HealthTypes {
-    Allergies,
-    Behavioral,
-    Eating,
-    Healthy
-}
+
 public class Health {
     Pet myPet;
-    HealthTypes myHealth;
-
+    List<Symptom> symptoms;
     public Health(Pet p) {
         myPet = p;
+        symptoms = new ArrayList<Symptom>();
     }
-   public void setHealth(String s) {
-        myPet.updateHealth(s);
-        if (HealthTypes.valueOf(s) != HealthTypes.Healthy)
-            System.out.println(myPet.name + " is suffering from " + s);
-        else
-            System.out.println(myPet.name + " is healthy");
-        myHealth = HealthTypes.valueOf(s);
+   public void addSymptom(String s) {
+       symptoms.add(new Symptom(s));
+
    }
-    public HealthTypes getHealth() {
-        return myHealth;
+    public List<Symptom> getHealth() {
+        return symptoms;
     }
+   public String toString() {
+       return myPet.name + " " + symptoms;
+   }
 }
 class BehavioralHealth extends Health {
     private Pet p;
@@ -73,11 +63,7 @@ class Symptom {
         bw.write(symptom + ",");
         bw.close();
     }
-}
-class Main {
-    public static void main(String[] args) {
-        Pet p = new Ferret("Mallory", new Date());
-        p.display();
-        p.updateHealth("Behavioral");
+    public String toString() {
+        return "Symptom: " + symptom + " Date: " + myDate;
     }
 }
