@@ -70,3 +70,17 @@ class Symptom {
         return "Symptom: " + symptom + " Date: " + myDate;
     }
 }
+class UpdateHealthLog {
+    static void updateHealth(Pet p) {
+        try {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter the type of health problem and then the symptom ");
+        String type = sc.next();
+        String symptom = sc.next();
+        sc.close();
+        p.log(type, symptom);
+    } catch(NoSuchElementException e) {
+            p.log("Healthy", "Okay");
+        }
+    }
+}
