@@ -11,33 +11,56 @@ import java.util.Scanner;
 import java.text.SimpleDateFormat;
 class Main {
     public static void main(String[] args) throws ParseException {
+        Pet myPet = new AddAPet().addPet();
+        System.out.println(myPet);
+    }
+
+}
+class AddAPet {
+    public Pet addPet() throws ParseException {
         Pet myPet;
+        String species = "None";
         Scanner sc = new Scanner(System.in);
         System.out.println("What kind of pet do you have?");
         TypesOfPets animal = TypesOfPets.valueOf(sc.next());
+        if (animal == TypesOfPets.Reptile) {
+
+        }
         System.out.println("What is their name?");
         String name = sc.next();
-        System.out.println("Finally, what is their birthday? (Enter MM/DD/YY)");
-        SimpleDateFormat sdf = new SimpleDateFormat("MM/DD/YY");
+        System.out.println("Finally, what is their birthday? (Enter MM-DD-YY)");
+        SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yy");
         Date birthday = sdf.parse(sc.next());
         sc.close();
-        switch(animal) {
-            case Cat -> myPet = new Cat(name, birthday);
-            case Dog -> myPet = new Bird(name, birthday);
-            case Fish -> myPet = new Fish(name, birthday);
-            case Ferret -> myPet = new Ferret(name, birthday);
-            case Bird -> myPet = new Bird(name, birthday);
-            case Rabbit -> myPet = new Rabbit(name, birthday);
+        switch (animal) {
+            case Dog -> {
+                myPet = new Dog(name, birthday);
+                break;
+            }
+            case Fish -> {
+                myPet = new Fish(name, birthday);
+                break;
+            }
+            case Ferret -> {
+                myPet = new Ferret(name, birthday);
+                break;
+            }
+            case Bird -> {
+                myPet = new Bird(name, birthday);
+                break;
+            }
+            case Rabbit -> {
+                myPet = new Rabbit(name, birthday);
+                break;
+            }
             case Reptile -> {
-                System.out.println("What species is your pet?");
-                sc = new Scanner(System.in);
-                String species = sc.next();
-                sc.close();
                 myPet = new Reptile(name, birthday, species);
             }
-            default -> myPet = new Cat(name, birthday);
+            default -> {
+                myPet = new Cat(name, birthday);
+                break;
+            }
         }
-        System.out.println("My pet" + myPet);
-
+        return myPet;
     }
 }
