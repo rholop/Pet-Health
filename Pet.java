@@ -7,6 +7,15 @@ import java.util.Scanner;
  * @author (your name)
  * @version (a version number or a date)
  */
+enum TypesOfPets {
+    Bird,
+    Cat,
+    Dog,
+    Ferret,
+    Fish,
+    Rabbit,
+    Reptile
+}
 public abstract class Pet
 {
     String name;
