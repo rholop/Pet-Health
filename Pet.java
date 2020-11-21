@@ -67,4 +67,10 @@ public abstract class Pet
         else
             System.out.println(myHealth);
     }
+        public String getType() {
+        return type;
+    }
+    public String getName() {
+        return name;
+    }
 }
