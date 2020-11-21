@@ -1,14 +1,15 @@
 import java.io.*;
 import java.util.Date;
+import java.util.ArrayList;
 
 public class DeserializeDemo {
 
    public static void main(String [] args) {
-      Pet p = null;
+      ArrayList<Pet> petList = null;
       try {
          FileInputStream fileIn = new FileInputStream("/tmp/pet.ser");
          ObjectInputStream in = new ObjectInputStream(fileIn);
-         p = (Pet) in.readObject();
+         petList = (ArrayList<Pet>) in.readObject();
          in.close();
          fileIn.close();
       } catch (IOException i) {
@@ -21,8 +22,8 @@ public class DeserializeDemo {
       }
       
       System.out.println("Deserialized Pet...");
-      System.out.println("Name: " + p.name);
-      System.out.println("Type: " + p.type);
-      System.out.println("Birthday: " + p.birthday);
+      for (Pet p : petList) {
+          System.out.println(p);
+        }
    }
 }
