@@ -1,6 +1,5 @@
 #BlueJ class context
 comment0.target=Pet
-comment0.text=\r\n\ Write\ a\ description\ of\ interface\ Pet\ here.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
 comment1.params=name\ type\ birthday
 comment1.target=Pet(java.lang.String,\ java.lang.String,\ java.util.Date)
 comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ Pet\r\n\ \r\n\ @param\ name\ string\ with\ pet's\ name\r\n\ @param\ type\ string\ of\ pet's\ type\r\n

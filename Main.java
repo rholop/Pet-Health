@@ -25,7 +25,8 @@ class AddAPet {
         System.out.println("What kind of pet do you have?");
         TypesOfPets animal = TypesOfPets.valueOf(sc.next());
         if (animal == TypesOfPets.Reptile) {
-
+            System.out.println("What species are they?");
+            species = sc.next();
         }
         System.out.println("What is their name?");
         String name = sc.next();

@@ -61,10 +61,10 @@ public abstract class Pet
      public String toString() {
          return name + ": " +"Type: " + type + " Birthday " + birthday;
 }
-public void display() {
-    if (myHealth.symptoms.isEmpty())
-        System.out.println(name + " profile " + " has no recorded data.");
-    else
-        System.out.println(myHealth);
-}
+    public void display() {
+        if (myHealth.symptoms.isEmpty())
+            System.out.println(name + " profile " + " has no recorded data.");
+        else
+            System.out.println(myHealth);
+    }
 }
