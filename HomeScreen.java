@@ -24,6 +24,7 @@ public class HomeScreen extends JFrame {
     SerializeDemo sd;
     DeserializeDemo d;
     List<Pet> pets;
+    Map<String,ImageIcon> icons;
 
     public HomeScreen() {
         sd = new SerializeDemo();
@@ -35,7 +36,6 @@ public class HomeScreen extends JFrame {
 
     private void initUI() {
         pets = d.petList;
-        System.out.println(pets);
 
         createLayout(getButtons(pets));
 
@@ -45,7 +45,6 @@ public class HomeScreen extends JFrame {
     }
 
     private void createLayout(Map<Pet,Icon> icons) {
-
         var pane = getContentPane();
         var gl = new GroupLayout(pane);
         pane.setLayout(gl);
@@ -64,26 +63,33 @@ public class HomeScreen extends JFrame {
     }
 
     public Map<Pet,Icon> getButtons(List<Pet> pets){
-
-        System.out.println(pets.getClass());
         Map<Pet,Icon> buttons = new LinkedHashMap<Pet,Icon>(pets.size());
+        icons = new HashMap<String,ImageIcon>();
 
         var birdIcon = new ImageIcon("icons/bird.jpg");
+        icons.put("Bird", birdIcon);
         var catIcon = new ImageIcon("icons/cat.jpg");
+        icons.put("Cat", catIcon);
         var dogIcon = new ImageIcon("icons/dog.jpg");
+        icons.put("Dog", dogIcon);
         var ferretIcon = new ImageIcon("icons/ferret.jpg");
+        icons.put("Ferret", ferretIcon);
         var fishIcon = new ImageIcon("icons/fish.jpg");
+        icons.put("Fish", fishIcon);
         var otherIcon = new ImageIcon("icons/other.jpg");
+        icons.put("Other", otherIcon);
         var plusIcon = new ImageIcon("icons/plus.jpg");
         var rabbitIcon = new ImageIcon("icons/rabbit.jpg");
-        var repitleIcon = new ImageIcon("icons/reptile.jpg");
+        icons.put("Rabbit", rabbitIcon);
+        var reptileIcon = new ImageIcon("icons/reptile.jpg");
+        icons.put("Reptile", reptileIcon);
 
         Font plainFont = new Font("Helvetica", Font.PLAIN, 24);
 
         for (Pet pet: pets) {
             String type = pet.getType();
             String name = pet.getName();
-            System.out.println(type + " " + name);
+
             CompoundIcon icon;
             if (type.equals("Cat")) {
                 icon = new CompoundIcon(CompoundIcon.Axis.Y_AXIS,
@@ -115,9 +121,9 @@ public class HomeScreen extends JFrame {
                     rabbitIcon,
                     new TextIcon(new JButton(), name, plainFont));
             }
-            else if (type.equals("Repitle")) {
+            else if (type.equals("Reptile")) {
                 icon = new CompoundIcon(CompoundIcon.Axis.Y_AXIS,
-                    repitleIcon,
+                    reptileIcon,
                     new TextIcon(new JButton(), name, plainFont));
             }
             else {
@@ -138,41 +144,12 @@ public class HomeScreen extends JFrame {
 
     public void makeButtonMenus(JButton button, Pet key) {
         if (key == null) {return;}
-        Pet currentPet = key;
         JFrame frame = this;
-        JPopupMenu mainMenu = new JPopupMenu();
-        JMenu childMenu = new JMenu("Options");
-        
-        childMenu.add(new JMenuItem(new AbstractAction("Option 1") 
-                {
-                    public void actionPerformed(ActionEvent e) {
-                        JOptionPane.showMessageDialog(frame, "Option 1 selected");
-                    }
-                }));
-        childMenu.add(new JMenuItem(new AbstractAction("Option 2") 
-                {
-                    public void actionPerformed(ActionEvent e) {
-                        JOptionPane.showMessageDialog(frame, "Option 2 selected");
-                    }
-                }));
-        JMenu chilMenu = new JMenu("Options");
-        
-        chilMenu.add(new JMenuItem(new AbstractAction("Option 1") 
-                {
-                    public void actionPerformed(ActionEvent e) {
-                        JOptionPane.showMessageDialog(frame, "Option 1 selected");
-                    }
-                }));
-        chilMenu.add(new JMenuItem(new AbstractAction("Option 2") 
-                {
-                    public void actionPerformed(ActionEvent e) {
-                        JOptionPane.showMessageDialog(frame, "Option 2 selected");
-                    }
-                }));     
-       
-        mainMenu.add(childMenu);
-        mainMenu.add(chilMenu);
-       
+        JPopupMenu mainMenu = new JPopupMenu();   
+
+        mainMenu.add(makeSubMenu(key, "Current Symptoms"));
+        mainMenu.add(menuItem(key, "All Symptoms"));
+
         button.addMouseListener(new MouseAdapter() 
             {
                 public void mousePressed(MouseEvent e) {
@@ -180,11 +157,51 @@ public class HomeScreen extends JFrame {
                 }
             });
     }
+    
+    public JMenuItem menuItem(Pet p, String title){
+        JFrame frame = this;
+        if (title.equals("All Symptoms")) {
+            Health health = p.myHealth;
+            String symptomList = health.allSymptoms();
+            return new JMenuItem(new AbstractAction(title) 
+                {
+                    public void actionPerformed(ActionEvent e) {
+                        JOptionPane.showMessageDialog(frame, symptomList, title, JOptionPane.PLAIN_MESSAGE, icons.get(p.getType()));
+                    }
+                });
+        }
+        else {
+            return new JMenuItem(new AbstractAction(title) 
+                {
+                    public void actionPerformed(ActionEvent e) {
+                        JOptionPane.showMessageDialog(frame, p, title, JOptionPane.PLAIN_MESSAGE, icons.get(p.getType()));
+                    }
+                });
+        }
+    }
 
+    public JMenu makeSubMenu(Pet p, String title) {
+        JFrame frame = this;
+        JMenu childMenu = new JMenu(title);
+        if (title.equals("Current Symptoms")) {
+            Health health = p.myHealth;
+            List<Symptom> symptoms = health.getHealth();
+            for (Symptom s : symptoms) {
+                childMenu.add(new JMenuItem(new AbstractAction(s.symptom) 
+                {
+                    public void actionPerformed(ActionEvent e) {
+                        JOptionPane.showMessageDialog(frame, s, "Symptom information", JOptionPane.PLAIN_MESSAGE, icons.get(p.getType()));
+                    }
+                }));
+            }
+        }
+        return childMenu;
+    }
+    
     public static void main(String[] args) {
         EventQueue.invokeLater(() -> {
                 var ex = new HomeScreen();
                 ex.setVisible(true);
-        });
+            });
     }
 }

@@ -12,7 +12,6 @@ import java.text.SimpleDateFormat;
 class Main {
     public static void main(String[] args) throws ParseException {
         Pet myPet = new AddAPet().addPet();
-        System.out.println(myPet);
         UpdateHealthLog.updateHealth(myPet);
     }
 

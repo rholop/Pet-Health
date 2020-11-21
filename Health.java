@@ -19,21 +19,28 @@ public class Health implements java.io.Serializable {
         myPet = p;
         symptoms = new ArrayList<Symptom>();
     }
-   public void addSymptom(String s, String type) {
+    public void addSymptom(String s, String type) {
        symptoms.add(new Symptom(s));
-   }
-   public void addSymptom(Symptom s) {
+    }
+    public void addSymptom(Symptom s) {
     symptoms.add(s);
     }
-   public void addSymptom(String s) {
+    public void addSymptom(String s) {
     symptoms.add(new Symptom(s));
     }
     public List<Symptom> getHealth() {
         return symptoms;
     }
-   public String toString() {
+    public String allSymptoms() {
+        String symptom = "";
+        for (Symptom s : symptoms) {
+                symptom = symptom + s + "\n";
+        }
+        return symptom;
+    }
+    public String toString() {
        return myPet.name + " " + symptoms;
-   }
+    }
 }
 /**
  * Class Symptom
@@ -43,11 +50,11 @@ public class Health implements java.io.Serializable {
  * @version 11/14/2020
  */
 class Symptom implements java.io.Serializable {
-    String type;
+    //String type;
     String symptom;
     Date myDate;
     public Symptom(String symptom) {
-        this.type = "General";
+        //this.type = "General";
         this.symptom = symptom;
         this.myDate = new Date();
     }
