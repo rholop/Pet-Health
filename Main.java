@@ -35,30 +35,30 @@ class AddAPet {
         Date birthday = sdf.parse(sc.next());
         sc.close();
         switch (animal) {
-            case Dog -> {
+            case Dog: {
                 myPet = new Dog(name, birthday);
                 break;
             }
-            case Fish -> {
+            case Fish: {
                 myPet = new Fish(name, birthday);
                 break;
             }
-            case Ferret -> {
+            case Ferret: {
                 myPet = new Ferret(name, birthday);
                 break;
             }
-            case Bird -> {
+            case Bird: {
                 myPet = new Bird(name, birthday);
                 break;
             }
-            case Rabbit -> {
+            case Rabbit: {
                 myPet = new Rabbit(name, birthday);
                 break;
             }
-            case Reptile -> {
+            case Reptile: {
                 myPet = new Reptile(name, birthday, species);
             }
-            default -> {
+            default: {
                 myPet = new Cat(name, birthday);
                 break;
             }
