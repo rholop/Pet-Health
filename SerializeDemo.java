@@ -1,4 +1,5 @@
 import java.io.*;
+import java.nio.file.Paths;
 import java.util.Date;
 import java.util.ArrayList;
 
@@ -20,8 +21,9 @@ public class SerializeDemo {
         petList.add(p2);
 
         try {
+            String name = "/tmp/pet.ser";
             FileOutputStream fileOut =
-                new FileOutputStream("/tmp/pet.ser");
+                new FileOutputStream(Paths.get("/tmp/pet.ser").toString());
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             out.writeObject(petList);
             out.close();
