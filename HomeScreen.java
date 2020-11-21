@@ -21,17 +21,21 @@ import javax.swing.Icon;
  */
 
 public class HomeScreen extends JFrame {
+    SerializeDemo sd;
+    DeserializeDemo d;
+    List<Pet> pets;
 
     public HomeScreen() {
+        sd = new SerializeDemo();
+        d = new DeserializeDemo();
+        sd.run();
+        d.run();
         initUI();
     }
 
     private void initUI() {
-
-        Pet cat = new Cat("Polly", new Date());
-        Pet dog = new Dog("Fido", new Date());
-
-        List<Pet> pets = new ArrayList(Arrays.asList(cat, dog));
+        pets = d.petList;
+        System.out.println(pets);
 
         createLayout(getButtons(pets));
 
@@ -61,6 +65,7 @@ public class HomeScreen extends JFrame {
 
     public Map<Pet,Icon> getButtons(List<Pet> pets){
 
+        System.out.println(pets.getClass());
         Map<Pet,Icon> buttons = new LinkedHashMap<Pet,Icon>(pets.size());
 
         var birdIcon = new ImageIcon("icons/bird.jpg");
@@ -78,38 +83,39 @@ public class HomeScreen extends JFrame {
         for (Pet pet: pets) {
             String type = pet.getType();
             String name = pet.getName();
+            System.out.println(type + " " + name);
             CompoundIcon icon;
-            if (type == "Cat") {
+            if (type.equals("Cat")) {
                 icon = new CompoundIcon(CompoundIcon.Axis.Y_AXIS,
                     catIcon,
                     new TextIcon(new JButton(), name, plainFont));
             }
-            else if (type == "Bird") {
+            else if (type.equals("Bird")) {
                 icon = new CompoundIcon(CompoundIcon.Axis.Y_AXIS,
                     birdIcon,
                     new TextIcon(new JButton(), name, plainFont));
             }
-            else if (type == "Ferret") {
+            else if (type.equals("Ferret")) {
                 icon = new CompoundIcon(CompoundIcon.Axis.Y_AXIS,
                     ferretIcon,
                     new TextIcon(new JButton(), name, plainFont));
             }
-            else if (type == "Fish") {
+            else if (type.equals("Fish")) {
                 icon = new CompoundIcon(CompoundIcon.Axis.Y_AXIS,
                     fishIcon,
                     new TextIcon(new JButton(), name, plainFont));
             }
-            else if (type == "Other") {
+            else if (type.equals("Other")) {
                 icon = new CompoundIcon(CompoundIcon.Axis.Y_AXIS,
                     otherIcon,
                     new TextIcon(new JButton(), name, plainFont));
             }
-            else if (type == "Rabbit") {
+            else if (type.equals("Rabbit")) {
                 icon = new CompoundIcon(CompoundIcon.Axis.Y_AXIS,
                     rabbitIcon,
                     new TextIcon(new JButton(), name, plainFont));
             }
-            else if (type == "Repitle") {
+            else if (type.equals("Repitle")) {
                 icon = new CompoundIcon(CompoundIcon.Axis.Y_AXIS,
                     repitleIcon,
                     new TextIcon(new JButton(), name, plainFont));
