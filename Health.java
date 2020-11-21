@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.*;
 import java.util.Date;
 
-public class Health {
+public class Health implements java.io.Serializable {
     Pet myPet;
     List<Symptom> symptoms;
     public Health(Pet p) {
@@ -42,7 +42,7 @@ public class Health {
  * @author melmccord
  * @version 11/14/2020
  */
-class Symptom {
+class Symptom implements java.io.Serializable {
     String type;
     String symptom;
     Date myDate;
@@ -70,7 +70,7 @@ class Symptom {
         return "Symptom: " + symptom + " Date: " + myDate;
     }
 }
-class UpdateHealthLog {
+class UpdateHealthLog implements java.io.Serializable {
     static void updateHealth(Pet p) {
         try {
         Scanner sc = new Scanner(System.in);

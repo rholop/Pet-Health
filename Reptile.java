@@ -6,7 +6,7 @@ import java.util.Date;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class Reptile extends Pet
+public class Reptile extends Pet implements java.io.Serializable
 {
     String species;
     

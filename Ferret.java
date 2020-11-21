@@ -6,7 +6,7 @@ import java.util.Date;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class Ferret extends Pet
+public class Ferret extends Pet implements java.io.Serializable
 {
     /**
      * Constructor for objects of class Ferret

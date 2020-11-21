@@ -16,7 +16,7 @@ enum TypesOfPets {
     Rabbit,
     Reptile
 }
-public abstract class Pet
+public abstract class Pet implements java.io.Serializable
 {
     String name;
     String type;
@@ -58,16 +58,16 @@ public abstract class Pet
     public void updateHealth(String s) {
         this.myHealth.addSymptom(s);
     }
-     public String toString() {
+    public String toString() {
          return name + ": " +"Type: " + type + " Birthday " + birthday;
-}
+    }
     public void display() {
         if (myHealth.symptoms.isEmpty())
             System.out.println(name + " profile " + " has no recorded data.");
         else
             System.out.println(myHealth);
     }
-        public String getType() {
+    public String getType() {
         return type;
     }
     public String getName() {
