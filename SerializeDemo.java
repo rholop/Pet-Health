@@ -3,8 +3,12 @@ import java.util.Date;
 import java.util.ArrayList;
 
 public class SerializeDemo {
+    
+    public SerializeDemo() {
+        run();
+    }
 
-   public static void main(String [] args) {
+   public void run() {
       Pet p1 = new Dog("Fido", new Date());
       Pet p2 = new Cat("Polly", new Date());
       Symptom s1 = new Symptom("Bellyache");
@@ -28,4 +32,5 @@ public class SerializeDemo {
          i.printStackTrace();
       }
    }
+   
 }
