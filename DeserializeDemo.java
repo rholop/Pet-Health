@@ -3,11 +3,13 @@ import java.util.Date;
 import java.util.ArrayList;
 
 public class DeserializeDemo {
+    ArrayList<Pet> petList;
+    
+    
 
-   public static void main(String [] args) {
-      ArrayList<Pet> petList = null;
+   public void main(String [] args) {
       try {
-         FileInputStream fileIn = new FileInputStream("/tmp/pet.ser");
+         FileInputStream fileIn = new FileInputStream("/data/pet.ser");
          ObjectInputStream in = new ObjectInputStream(fileIn);
          petList = (ArrayList<Pet>) in.readObject();
          in.close();
@@ -21,7 +23,7 @@ public class DeserializeDemo {
          return;
       }
       
-      System.out.println("Deserialized Pet...");
+      System.out.println("Deserialized Pets...");
       for (Pet p : petList) {
           System.out.println(p);
         }
