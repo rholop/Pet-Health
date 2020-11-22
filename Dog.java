@@ -13,6 +13,7 @@ public class Dog extends Pet implements java.io.Serializable
      * Constructor for objects of class Dog
      * 
      * @param name name of the Dog
+     * @param Date birthday of pet
      */
     public Dog(String name, Date birthday)
     {

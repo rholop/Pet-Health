@@ -13,6 +13,7 @@ public class Reptile extends Pet implements java.io.Serializable
      * Constructor for objects of class Reptile
      * 
      * @param name name of the Reptile
+     * @param Date birthday of pet
      */
     public Reptile(String name, Date birthday, String species)
     {

@@ -13,6 +13,7 @@ public class Rabbit extends Pet implements java.io.Serializable
      * Constructor for objects of class Rabbit
      * 
      * @param name name of the Rabbit
+     * @param Date birthday of pet
      */
     public Rabbit(String name, Date birthday)
     {

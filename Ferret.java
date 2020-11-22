@@ -13,6 +13,7 @@ public class Ferret extends Pet implements java.io.Serializable
      * Constructor for objects of class Ferret
      * 
      * @param name name of the Ferret
+     * @param Date birthday of pet
      */
     public Ferret(String name, Date birthday)
     {
