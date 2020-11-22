@@ -23,9 +23,6 @@ class AddAPet {
         Scanner sc = new Scanner(System.in);
         System.out.println("What kind of pet do you have?");
         TypesOfPets animal = TypesOfPets.valueOf(sc.next());
-        if (animal == TypesOfPets.Reptile) {
-
-        }
         System.out.println("What is their name?");
         String name = sc.next();
         System.out.println("Finally, what is their birthday? (Enter MM-DD-YY)");
@@ -33,34 +30,27 @@ class AddAPet {
         Date birthday = sdf.parse(sc.next());
         sc.close();
         switch (animal) {
-            case Dog -> {
+            case Dog: 
                 myPet = new Dog(name, birthday);
                 break;
-            }
-            case Fish -> {
+            case Fish:
                 myPet = new Fish(name, birthday);
                 break;
-            }
-            case Ferret -> {
+            case Ferret:
                 myPet = new Ferret(name, birthday);
                 break;
-            }
-            case Bird -> {
+            case Bird:
                 myPet = new Bird(name, birthday);
                 break;
-            }
-            case Rabbit -> {
+            case Rabbit:
                 myPet = new Rabbit(name, birthday);
                 break;
-            }
-            case Reptile -> {
+            case Reptile:
                 myPet = new Reptile(name, birthday, species);
-            }
-            default -> {
+            default:
                 myPet = new Cat(name, birthday);
                 break;
             }
-        }
         return myPet;
     }
 }

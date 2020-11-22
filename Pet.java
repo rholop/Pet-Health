@@ -33,7 +33,7 @@ public abstract class Pet implements java.io.Serializable
         this.name = name;
         this.type = type;
         this.birthday = birthday;
-        this.myHealth = new Health(this);
+        this.myHealth = new Health();
         // log = new #Object();
         // generate an ID?
     }
@@ -43,17 +43,15 @@ public abstract class Pet implements java.io.Serializable
      * 
      * @param
      */
-    public void log(String date, String time, String healthLogType, String data) {
+    public void log(String date, String data) {
         Date myDate = new Date(date);
-        Symptom s = new Symptom(data, healthLogType, myDate);
-        this.myHealth.addSymptom(s);
+        this.myHealth.addSymptom(new Symptom(data, myDate));
     }
-    public void log(String healthLogType, String data) {
-        Symptom s = new Symptom(data, healthLogType);
-        this.myHealth.addSymptom(s);
+    public void log(String data) {
+        this.myHealth.addSymptom(new Symptom(data));
     }
     public void clearHealth() {
-        myHealth = new Health(this);
+        myHealth = new Health();
     }
     public void updateHealth(String s) {
         this.myHealth.addSymptom(s);

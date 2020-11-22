@@ -12,21 +12,19 @@ import java.io.IOException;
 import java.util.*;
 import java.util.Date;
 
-public class Health implements java.io.Serializable {
-    Pet myPet;
+public class Health implements java.io.Serializable{
     List<Symptom> symptoms;
-    public Health(Pet p) {
-        myPet = p;
+    public Health() {
         symptoms = new ArrayList<Symptom>();
     }
-    public void addSymptom(String s, String type) {
+    /**public void addSymptom(String s, String type) {
        symptoms.add(new Symptom(s));
-    }
+    }**/
     public void addSymptom(Symptom s) {
-    symptoms.add(s);
+        symptoms.add(s);
     }
     public void addSymptom(String s) {
-    symptoms.add(new Symptom(s));
+        symptoms.add(new Symptom(s));
     }
     public List<Symptom> getHealth() {
         return symptoms;
@@ -39,7 +37,7 @@ public class Health implements java.io.Serializable {
         return symptom;
     }
     public String toString() {
-       return myPet.name + " " + symptoms;
+       return symptoms.toString();
     }
 }
 /**
@@ -58,14 +56,6 @@ class Symptom implements java.io.Serializable {
         this.symptom = symptom;
         this.myDate = new Date();
     }
-    public Symptom(String symptom, String type) {
-        this.symptom = symptom;
-        myDate = new Date();
-    }
-    public Symptom(String symptom, String type, Date date) {
-        this.symptom = symptom;
-        myDate = new Date();
-    }
     public Symptom(String s, Date date) {
         this.symptom = s;
         myDate = date;
@@ -81,11 +71,10 @@ class UpdateHealthLog implements java.io.Serializable {
     static void updateHealth(Pet p) {
         try {
         Scanner sc = new Scanner(System.in);
-        System.out.print("Enter the type of health problem and then the symptom ");
-        String type = sc.next();
+        System.out.print("Enter the symptom: ");
         String symptom = sc.next();
         sc.close();
-        p.log(type, symptom);
+        p.log(symptom);
     } catch(NoSuchElementException e) {
             p.log("Healthy", "Okay");
         }
