@@ -1,23 +1,21 @@
 import java.util.Date;
+import javax.swing.*;
 
 /**
  * Write a description of class Other here.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author rowanholop
+ * @version 11.22.2020
  */
 public class Other extends Pet implements java.io.Serializable
 {
-    String species;
-    
     /**
      * Constructor for objects of class Other
      * 
      * @param name name of the Other
      */
-    public Other(String name, Date birthday, String species)
+    public Other(String name, Date birthday)
     {
         super(name, "Other", birthday);
-        this.species = species;
     }
 }

@@ -1,10 +1,11 @@
 import java.util.Date;
+import javax.swing.*;
 
 /**
  * Write a description of class Ferret here.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author rowanholop
+ * @version 11.22.2020
  */
 public class Ferret extends Pet implements java.io.Serializable
 {
@@ -16,5 +17,6 @@ public class Ferret extends Pet implements java.io.Serializable
     public Ferret(String name, Date birthday)
     {
         super(name, "Ferret", birthday);
+        super.icon = new ImageIcon("icons/ferret.jpg");
     }
 }

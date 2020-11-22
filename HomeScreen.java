@@ -21,14 +21,14 @@ import javax.swing.Icon;
  */
 
 public class HomeScreen extends JFrame {
-    SerializeDemo sd;
-    DeserializeDemo d;
+    Serialize sd;
+    Deserialize d;
     List<Pet> pets;
     Map<String,ImageIcon> icons;
 
     public HomeScreen() {
-        sd = new SerializeDemo();
-        d = new DeserializeDemo();
+        sd = new Serialize();
+        d = new Deserialize();
         sd.run();
         d.run();
         initUI();
@@ -64,78 +64,17 @@ public class HomeScreen extends JFrame {
 
     public Map<Pet,Icon> getButtons(List<Pet> pets){
         Map<Pet,Icon> buttons = new LinkedHashMap<Pet,Icon>(pets.size());
-        icons = new HashMap<String,ImageIcon>();
-
-        var birdIcon = new ImageIcon("icons/bird.jpg");
-        icons.put("Bird", birdIcon);
-        var catIcon = new ImageIcon("icons/cat.jpg");
-        icons.put("Cat", catIcon);
-        var dogIcon = new ImageIcon("icons/dog.jpg");
-        icons.put("Dog", dogIcon);
-        var ferretIcon = new ImageIcon("icons/ferret.jpg");
-        icons.put("Ferret", ferretIcon);
-        var fishIcon = new ImageIcon("icons/fish.jpg");
-        icons.put("Fish", fishIcon);
-        var otherIcon = new ImageIcon("icons/other.jpg");
-        icons.put("Other", otherIcon);
-        var plusIcon = new ImageIcon("icons/plus.jpg");
-        var rabbitIcon = new ImageIcon("icons/rabbit.jpg");
-        icons.put("Rabbit", rabbitIcon);
-        var reptileIcon = new ImageIcon("icons/reptile.jpg");
-        icons.put("Reptile", reptileIcon);
-
         Font plainFont = new Font("Helvetica", Font.PLAIN, 24);
 
         for (Pet pet: pets) {
-            String type = pet.getType();
-            String name = pet.getName();
-
-            CompoundIcon icon;
-            if (type.equals("Cat")) {
-                icon = new CompoundIcon(CompoundIcon.Axis.Y_AXIS,
-                    catIcon,
-                    new TextIcon(new JButton(), name, plainFont));
-            }
-            else if (type.equals("Bird")) {
-                icon = new CompoundIcon(CompoundIcon.Axis.Y_AXIS,
-                    birdIcon,
-                    new TextIcon(new JButton(), name, plainFont));
-            }
-            else if (type.equals("Ferret")) {
-                icon = new CompoundIcon(CompoundIcon.Axis.Y_AXIS,
-                    ferretIcon,
-                    new TextIcon(new JButton(), name, plainFont));
-            }
-            else if (type.equals("Fish")) {
-                icon = new CompoundIcon(CompoundIcon.Axis.Y_AXIS,
-                    fishIcon,
-                    new TextIcon(new JButton(), name, plainFont));
-            }
-            else if (type.equals("Other")) {
-                icon = new CompoundIcon(CompoundIcon.Axis.Y_AXIS,
-                    otherIcon,
-                    new TextIcon(new JButton(), name, plainFont));
-            }
-            else if (type.equals("Rabbit")) {
-                icon = new CompoundIcon(CompoundIcon.Axis.Y_AXIS,
-                    rabbitIcon,
-                    new TextIcon(new JButton(), name, plainFont));
-            }
-            else if (type.equals("Reptile")) {
-                icon = new CompoundIcon(CompoundIcon.Axis.Y_AXIS,
-                    reptileIcon,
-                    new TextIcon(new JButton(), name, plainFont));
-            }
-            else {
-                icon = new CompoundIcon(CompoundIcon.Axis.Y_AXIS,
-                    dogIcon,
-                    new TextIcon(new JButton(), name, plainFont));
-            }
+            CompoundIcon icon = new CompoundIcon(CompoundIcon.Axis.Y_AXIS,
+                    pet.getIcon(),
+                    new TextIcon(new JButton(), pet.getName(), plainFont));
             buttons.put(pet, icon);
         }
 
         CompoundIcon icon = new CompoundIcon(CompoundIcon.Axis.Y_AXIS,
-                plusIcon,
+                new ImageIcon("icons/plus.jpg"),
                 new TextIcon(new JButton(), "Add New Pet", plainFont));
         buttons.put(null, icon);
 
@@ -143,7 +82,16 @@ public class HomeScreen extends JFrame {
     }
 
     public void makeButtonMenus(JButton button, Pet key) {
-        if (key == null) {return;}
+        if (key == null) {
+            /**
+            button.addMouseListener(new MouseAdapter() 
+            {
+                public void mousePressed(MouseEvent e) {
+                    mainMenu.show(e.getComponent(), e.getX(), e.getY());
+                }
+            });**/
+            return;
+        }
         JFrame frame = this;
         JPopupMenu mainMenu = new JPopupMenu();   
 
@@ -162,11 +110,10 @@ public class HomeScreen extends JFrame {
         JFrame frame = this;
         if (title.equals("All Symptoms")) {
             Health health = p.myHealth;
-            String symptomList = health.allSymptoms();
             return new JMenuItem(new AbstractAction(title) 
                 {
                     public void actionPerformed(ActionEvent e) {
-                        JOptionPane.showMessageDialog(frame, symptomList, title, JOptionPane.PLAIN_MESSAGE, icons.get(p.getType()));
+                        JOptionPane.showMessageDialog(frame, health.allSymptoms(), title, JOptionPane.PLAIN_MESSAGE, p.getIcon());
                     }
                 });
         }
@@ -174,7 +121,7 @@ public class HomeScreen extends JFrame {
             return new JMenuItem(new AbstractAction(title) 
                 {
                     public void actionPerformed(ActionEvent e) {
-                        JOptionPane.showMessageDialog(frame, p, title, JOptionPane.PLAIN_MESSAGE, icons.get(p.getType()));
+                        JOptionPane.showMessageDialog(frame, p, title, JOptionPane.PLAIN_MESSAGE, p.getIcon());
                     }
                 });
         }
@@ -190,7 +137,7 @@ public class HomeScreen extends JFrame {
                 childMenu.add(new JMenuItem(new AbstractAction(s.symptom) 
                 {
                     public void actionPerformed(ActionEvent e) {
-                        JOptionPane.showMessageDialog(frame, s, "Symptom information", JOptionPane.PLAIN_MESSAGE, icons.get(p.getType()));
+                        JOptionPane.showMessageDialog(frame, s, "Symptom Information", JOptionPane.PLAIN_MESSAGE, p.getIcon());
                     }
                 }));
             }

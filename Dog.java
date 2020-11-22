@@ -1,10 +1,11 @@
 import java.util.Date;
+import javax.swing.*;
 
 /**
  * Write a description of class Dog here.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author rowanholop
+ * @version 11.22.2020
  */
 public class Dog extends Pet implements java.io.Serializable
 {
@@ -16,5 +17,6 @@ public class Dog extends Pet implements java.io.Serializable
     public Dog(String name, Date birthday)
     {
         super(name, "Dog", birthday);
+        super.icon = new ImageIcon("icons/dog.jpg");
     }
 }

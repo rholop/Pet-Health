@@ -1,4 +1,3 @@
-
 /**
  * Write a description of class Health here.
  * Stores a pet's symptoms
@@ -17,9 +16,6 @@ public class Health implements java.io.Serializable{
     public Health() {
         symptoms = new ArrayList<Symptom>();
     }
-    /**public void addSymptom(String s, String type) {
-       symptoms.add(new Symptom(s));
-    }**/
     public void addSymptom(Symptom s) {
         symptoms.add(s);
     }
@@ -48,11 +44,9 @@ public class Health implements java.io.Serializable{
  * @version 11/14/2020
  */
 class Symptom implements java.io.Serializable {
-    //String type;
     String symptom;
     Date myDate;
     public Symptom(String symptom) {
-        //this.type = "General";
         this.symptom = symptom;
         this.myDate = new Date();
     }

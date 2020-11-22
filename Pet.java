@@ -1,11 +1,13 @@
 import java.util.Date;
 import java.util.Scanner;
+import javax.swing.*;
 
 /**
  * Write a description of interface Pet here.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author rowanholop
+ * @author melaniemccord
+ * @version 11.22.2030
  */
 enum TypesOfPets {
     Bird,
@@ -18,10 +20,10 @@ enum TypesOfPets {
 }
 public abstract class Pet implements java.io.Serializable
 {
+    ImageIcon icon;
     String name;
     String type;
     Date birthday;
-    // #Object for healthlog log;
     Health myHealth;
     /**
      * Constructor for objects of class Pet
@@ -34,41 +36,70 @@ public abstract class Pet implements java.io.Serializable
         this.type = type;
         this.birthday = birthday;
         this.myHealth = new Health();
-        // log = new #Object();
-        // generate an ID?
     }
-    
     /**
-     * Method to update the pet's log.
+     * Method to update the pet's health.
      * 
-     * @param
+     * @param date string that represents the date
+     * @param data string that represents the symptom
      */
     public void log(String date, String data) {
         Date myDate = new Date(date);
         this.myHealth.addSymptom(new Symptom(data, myDate));
     }
+    /**
+     * Overloaded to update the pet's health.
+     * 
+     * @param data string that represents the symptom
+     */
     public void log(String data) {
         this.myHealth.addSymptom(new Symptom(data));
     }
+    /**
+     * Reset the pet's health.
+     */
     public void clearHealth() {
         myHealth = new Health();
     }
-    public void updateHealth(String s) {
-        this.myHealth.addSymptom(s);
-    }
+    /**
+     * To String method.
+     * 
+     * @return String
+     */
     public String toString() {
          return name + ": " +"Type: " + type + " Birthday " + birthday;
     }
+    /**
+     * Display the pet's information and health to the console.
+     */
     public void display() {
         if (myHealth.symptoms.isEmpty())
             System.out.println(name + " profile " + " has no recorded data.");
         else
             System.out.println(myHealth);
     }
+    /**
+     * Getter for pet's type.
+     * 
+     * @return type string representing pet's type
+     */
     public String getType() {
         return type;
     }
+    /**
+     * Getter for pet's name.
+     * 
+     * @return type string representing pet's name
+     */
     public String getName() {
         return name;
+    }
+    /**
+     * Getter for pet's icon.
+     * 
+     * @return ImageIcon icon for this specific pet
+     */
+    public ImageIcon getIcon() {
+        return icon;
     }
 }
