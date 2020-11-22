@@ -10,9 +10,12 @@ import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.*;
 import java.awt.Font;
 import javax.swing.Icon;
+import java.text.ParseException;
 
 /**
  * Home screen class.
@@ -21,27 +24,37 @@ import javax.swing.Icon;
  */
 
 public class HomeScreen extends JFrame {
-    Serialize sd;
+    Serialize s;
     Deserialize d;
     List<Pet> pets;
     Map<String,ImageIcon> icons;
 
     public HomeScreen() {
-        sd = new Serialize();
+        s = new Serialize();
         d = new Deserialize();
-        sd.run();
         d.run();
+        pets = d.petList;
+        if (d.petList.size() > 0) {
+            for (Pet p : pets) {
+                s.add(p);
+            }
+        }
         initUI();
     }
 
     private void initUI() {
-        pets = d.petList;
-
         createLayout(getButtons(pets));
 
         setTitle("Home Screen");
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+        addWindowListener(new WindowAdapter() {
+                public void windowClosing(WindowEvent e) {
+                    s.run();
+                }
+            });
+
     }
 
     private void createLayout(Map<Pet,Icon> icons) {
@@ -82,21 +95,43 @@ public class HomeScreen extends JFrame {
     }
 
     public void makeButtonMenus(JButton button, Pet key) {
+        JFrame frame = this;
+
         if (key == null) {
-            /**
+            JTextField name = new JTextField();
+            JTextField birthday = new JTextField();
+            String[] petOptions = {"Bird", "Cat", "Dog", "Ferret", "Fish", "Rabbit", "Reptile", "Other"};
+            JComboBox petDropDown = new JComboBox(petOptions);    
+            Object[] fields  = {
+                    "Name:", name,
+                    "Birthday: (MM-DD-YYYY)", birthday,
+                    "Pet type:", petDropDown,
+                };
             button.addMouseListener(new MouseAdapter() 
-            {
-                public void mousePressed(MouseEvent e) {
-                    mainMenu.show(e.getComponent(), e.getX(), e.getY());
-                }
-            });**/
+                {
+                    public void mousePressed(MouseEvent e) {
+                        int option = JOptionPane.showConfirmDialog(null, fields, "Add New Pet", JOptionPane.OK_CANCEL_OPTION);
+                        if (option == JOptionPane.OK_OPTION) {
+                            System.out.println(name.getText() + birthday.getText() + petDropDown.getSelectedItem());
+                            Object selection = petDropDown.getSelectedItem();
+                            try {
+                                Pet temp = Functions.addPet(selection, name.getText(), birthday.getText());
+                                s.add(temp);
+                            }
+                            catch (Exception p) {
+                                 JOptionPane.showMessageDialog(null, "Error", "Invalid input", JOptionPane.PLAIN_MESSAGE);
+                            }
+                        }
+                    }
+                });
             return;
         }
-        JFrame frame = this;
-        JPopupMenu mainMenu = new JPopupMenu();   
 
+        JPopupMenu mainMenu = new JPopupMenu();
         mainMenu.add(makeSubMenu(key, "Current Symptoms"));
         mainMenu.add(menuItem(key, "All Symptoms"));
+        mainMenu.add(menuItem(key, "Add New Symptom"));
+
 
         button.addMouseListener(new MouseAdapter() 
             {
@@ -105,7 +140,7 @@ public class HomeScreen extends JFrame {
                 }
             });
     }
-    
+
     public JMenuItem menuItem(Pet p, String title){
         JFrame frame = this;
         if (title.equals("All Symptoms")) {
@@ -116,6 +151,30 @@ public class HomeScreen extends JFrame {
                         JOptionPane.showMessageDialog(frame, health.allSymptoms(), title, JOptionPane.PLAIN_MESSAGE, p.getIcon());
                     }
                 });
+        }
+        else if (title.equals("Add New Symptom")) {
+            JTextField symptom = new JTextField();
+            JTextField date = new JTextField(); 
+            Object[] fields  = {
+                    "Symptom Name:", symptom,
+                    "Date: (MM-DD-YYYY or leave blank)", date,
+                };
+            
+            return new JMenuItem(new AbstractAction(title)
+                {
+                    public void actionPerformed(ActionEvent e) {
+                        int option = JOptionPane.showConfirmDialog(null, fields, title, JOptionPane.OK_CANCEL_OPTION);
+                        if (option == JOptionPane.OK_OPTION) {
+                            if (date.getText().isEmpty()) {
+                                p.log(symptom.getText());
+                            }
+                            else {
+                                p.log(date.getText(), symptom.getText());
+                            }
+                        }
+                    }
+                });
+
         }
         else {
             return new JMenuItem(new AbstractAction(title) 
@@ -135,16 +194,16 @@ public class HomeScreen extends JFrame {
             List<Symptom> symptoms = health.getHealth();
             for (Symptom s : symptoms) {
                 childMenu.add(new JMenuItem(new AbstractAction(s.symptom) 
-                {
-                    public void actionPerformed(ActionEvent e) {
-                        JOptionPane.showMessageDialog(frame, s, "Symptom Information", JOptionPane.PLAIN_MESSAGE, p.getIcon());
-                    }
-                }));
+                        {
+                            public void actionPerformed(ActionEvent e) {
+                                JOptionPane.showMessageDialog(frame, s, "Symptom Information", JOptionPane.PLAIN_MESSAGE, p.getIcon());
+                            }
+                        }));
             }
         }
         return childMenu;
     }
-    
+
     public static void main(String[] args) {
         EventQueue.invokeLater(() -> {
                 var ex = new HomeScreen();

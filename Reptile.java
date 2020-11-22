@@ -15,7 +15,7 @@ public class Reptile extends Pet implements java.io.Serializable
      * @param name name of the Reptile
      * @param Date birthday of pet
      */
-    public Reptile(String name, Date birthday, String species)
+    public Reptile(String name, Date birthday)
     {
         super(name, "Reptile", birthday);
         super.icon = new ImageIcon("icons/reptile.jpg");

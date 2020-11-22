@@ -10,8 +10,6 @@ public class Deserialize {
        run();
     }
     
-    
-
    public void run() {
       try {
          FileInputStream fileIn = new FileInputStream("/tmp/pet.ser");
@@ -34,4 +32,7 @@ public class Deserialize {
         }
    }
    
+   public List<Pet> getList() {
+       return petList;
+   }
 }

@@ -69,7 +69,8 @@ class UpdateHealthLog implements java.io.Serializable {
         String symptom = sc.next();
         sc.close();
         p.log(symptom);
-    } catch(NoSuchElementException e) {
+        } 
+        catch(NoSuchElementException e) {
             p.log("Healthy", "Okay");
         }
     }

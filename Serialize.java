@@ -1,23 +1,18 @@
 import java.io.*;
-import java.util.Date;
-import java.util.ArrayList;
+import java.util.*;
 
 public class Serialize {
+    List<Pet> petList;
 
     public Serialize() {
-        run();
+        petList = new ArrayList();
+    }
+    
+    public void add(Pet p) {
+        petList.add(p);
     }
 
     public void run() {
-        Pet p1 = new Dog("Fido", new Date());
-        Pet p2 = new Cat("Polly", new Date());
-        Symptom s1 = new Symptom("Bellyache");
-        Symptom s2 = new Symptom("Vomitting");
-        p1.log("Bellyache");
-        p2.log("Vomitting");
-        ArrayList<Pet> petList = new ArrayList();
-        petList.add(p1);
-        petList.add(p2);
 
         try {
             FileOutputStream fileOut =
