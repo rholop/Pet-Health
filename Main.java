@@ -46,7 +46,7 @@ class AddAPet {
                 myPet = new Rabbit(name, birthday);
                 break;
             case Reptile:
-                myPet = new Reptile(name, birthday, species);
+                myPet = new Reptile(name, birthday);
             default:
                 myPet = new Cat(name, birthday);
                 break;

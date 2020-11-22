@@ -13,7 +13,6 @@ public class Serialize {
     }
 
     public void run() {
-
         try {
             FileOutputStream fileOut =
                 new FileOutputStream("/tmp/pet.ser");

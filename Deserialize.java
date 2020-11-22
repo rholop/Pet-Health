@@ -5,34 +5,33 @@ import java.util.List;
 
 public class Deserialize {
    List<Pet> petList;
+   boolean prevData;
    
    public Deserialize() {
-       run();
+       prevData = false;
     }
-    
-   public void run() {
+   
+   public List<Pet> run() {
       try {
          FileInputStream fileIn = new FileInputStream("/tmp/pet.ser");
          ObjectInputStream in = new ObjectInputStream(fileIn);
          petList = (ArrayList<Pet>) in.readObject();
          in.close();
          fileIn.close();
+         prevData = true;
+         return petList;
       } catch (IOException i) {
-         i.printStackTrace();
-         return;
+         return null;
       } catch (ClassNotFoundException c) {
-         System.out.println("Employee class not found");
-         c.printStackTrace();
-         return;
+         System.out.println("Pet class not found");
+         return null;
       }
-      
-      System.out.println("Deserialized Pets...");
-      for (Pet p : petList) {
-          System.out.println(p);
-        }
    }
    
    public List<Pet> getList() {
+       if (prevData == false) {
+           return null;
+        }
        return petList;
    }
 }

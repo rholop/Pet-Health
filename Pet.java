@@ -16,7 +16,8 @@ enum TypesOfPets {
     Ferret,
     Fish,
     Rabbit,
-    Reptile
+    Reptile,
+    Other
 }
 public abstract class Pet implements java.io.Serializable
 {

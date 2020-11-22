@@ -34,8 +34,12 @@ public class Functions {
                 break;
             case Reptile:
                 myPet = new Reptile(name, birthday);
-            default:
+                break;
+            case Cat:
                 myPet = new Cat(name, birthday);
+                break;
+            default:
+                myPet = new Other(name, birthday);
                 break;
             }
         return myPet;
