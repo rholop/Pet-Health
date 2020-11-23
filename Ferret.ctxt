@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=Ferret
+comment0.text=\n\ Write\ a\ description\ of\ class\ Ferret\ here.\n\n\ @author\ (your\ name)\n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment1.params=name\ birthday
+comment1.target=Ferret(java.lang.String,\ java.util.Date)
+comment1.text=\n\ Constructor\ for\ objects\ of\ class\ Ferret\n\ \n\ @param\ name\ name\ of\ the\ Ferret\n
+numComments=2

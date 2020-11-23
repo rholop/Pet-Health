@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=Cat
+comment0.text=\n\ Write\ a\ description\ of\ class\ Cat\ here.\n\n\ @author\ (your\ name)\n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment1.params=name\ birthday
+comment1.target=Cat(java.lang.String,\ java.util.Date)
+comment1.text=\n\ Constructor\ for\ objects\ of\ class\ Cat\n\ \n\ @param\ name\ name\ of\ the\ Cat\n
+numComments=2

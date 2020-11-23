@@ -1,0 +1,17 @@
+#Sun Nov 22 21:21:37 EST 2020
+bluej.teamsettings.groupname=
+bluej.teamsettings.ignore1=.*\\.class
+bluej.teamsettings.yourName=Rowan Holop
+bluej.teamsettings.git.server=github.com
+bluej.teamsettings.yourEmail=rowan.holop13@ncf.edu
+bluej.teamsettings.git.repositoryPrefix=/rholop/Pet-Health
+bluej.teamsettings.vcs=git
+bluej.teamsettings.user=rholop
+bluej.teamsettings.ignore3=team\\.defs
+bluej.teamsettings.ignore2=bluej\\.pkh
+bluej.teamsettings.ignore5=.*\\~
+bluej.teamsettings.ignore4=.*\\.ctxt
+bluej.teamsettings.ignore7=.*\\\#backup
+bluej.teamsettings.ignore6=.*\\\#
+bluej.teamsettings.git.protocol=https
+bluej.teamsettings.ignore8=\\.DS_Store
