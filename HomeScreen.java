@@ -13,6 +13,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.Image;
+import java.awt.Component;
 import javax.imageio.ImageIO;
 import java.util.*;
 import java.io.*;
@@ -28,18 +29,21 @@ import java.text.ParseException;
 
 public class HomeScreen extends JFrame {
     BackEnd b;
-    Map<String,ImageIcon> icons;
     ImageIcon homeIcon;
+    List<JButton> currentButtons;
 
     public HomeScreen() {
         b = new BackEnd();
         b.loadData();
-        initUI();
+        currentButtons = new ArrayList<JButton>();
         homeIcon = new ImageIcon("icons/home.jpg");
+        initUI();
     }
 
     private void initUI() {
-        createLayout(getButtons(b.getPets()));
+        updateButtons(b.getPets());
+        createLayout();
+        setIconImage(homeIcon.getImage());
 
         setTitle("Home Screen");
         setLocationRelativeTo(null);
@@ -50,27 +54,29 @@ public class HomeScreen extends JFrame {
                     b.close();
                 }
             });
-
     }
-    private void createLayout(Map<Pet,Icon> icons) {
+    private void createLayout() {
         var pane = getContentPane();
         var gl = new GroupLayout(pane);
         pane.setLayout(gl);
         setLayout(new FlowLayout());
-
-        Iterator iconIterator = icons.entrySet().iterator();
-        while (iconIterator.hasNext()) { 
-            Map.Entry<Pet, Icon> pair = (Map.Entry)iconIterator.next(); 
-            JButton button = new JButton();
-            button.setIcon( pair.getValue() );
-            button.setFocusPainted( false );
-            add( button );
-            makeButtonMenus(button, pair.getKey());
-        } 
+        placeButtons();
+    }
+    private void placeButtons() {
+        for (JButton b : currentButtons) {
+            add ( b );
+        }
         pack();
     }
-
-    public Map<Pet,Icon> getButtons(List<Pet> pets){
+    private void refreshUI() {
+        for (JButton b : currentButtons) {
+            remove ( b );
+        }
+        updateButtons(b.getPets());
+        placeButtons();
+    }
+    private void updateButtons(List<Pet> pets){
+        currentButtons.clear();
         Map<Pet,Icon> buttons = new LinkedHashMap<Pet,Icon>(pets.size());
         Font plainFont = new Font("Helvetica", Font.PLAIN, 24);
 
@@ -85,11 +91,19 @@ public class HomeScreen extends JFrame {
                 new ImageIcon("icons/plus.jpg"),
                 new TextIcon(new JButton(), "Add New Pet", plainFont));
         buttons.put(null, icon);
-
-        return buttons;
+        
+        Iterator iconIterator = buttons.entrySet().iterator();
+        while (iconIterator.hasNext()) { 
+            Map.Entry<Pet, Icon> pair = (Map.Entry)iconIterator.next(); 
+            JButton button = new JButton();
+            button.setIcon( pair.getValue() );
+            button.setFocusPainted( false );
+            makeButtonMenus(button, pair.getKey());
+            currentButtons.add(button);
+        } 
     }
 
-    public void makeButtonMenus(JButton button, Pet key) {
+    private void makeButtonMenus(JButton button, Pet key) {
         JFrame frame = this;
 
         if (key == null) {
@@ -115,6 +129,7 @@ public class HomeScreen extends JFrame {
                                 JOptionPane.showMessageDialog(null, "Error", "Invalid input", JOptionPane.PLAIN_MESSAGE);
                             }
                         }
+                        refreshUI();
                     }
                 });
             return;
@@ -130,12 +145,11 @@ public class HomeScreen extends JFrame {
             {
                 public void mousePressed(MouseEvent e) {
                     mainMenu.show(e.getComponent(), e.getX(), e.getY());
-                    validate();
                 }
             });
     }
 
-    public JMenuItem menuItem(Pet p, String title){
+    private JMenuItem menuItem(Pet p, String title){
         JFrame frame = this;
         if (title.equals("All Symptoms")) {
             Health health = p.myHealth;
@@ -164,12 +178,13 @@ public class HomeScreen extends JFrame {
                         int option = JOptionPane.showConfirmDialog(null, fields, title, JOptionPane.OK_CANCEL_OPTION);
                         if (option == JOptionPane.OK_OPTION) {
                             if (date.getText().isEmpty()) {
-                                p.log(symptom.getText());
+                                b.updatePetHealth(p, symptom.getText());
                             }
                             else {
-                                p.log(date.getText(), symptom.getText());
+                                b.updatePetHealth(p, date.getText(), symptom.getText());
                             }
                         }
+                        refreshUI();
                     }
                 });
 
@@ -182,12 +197,13 @@ public class HomeScreen extends JFrame {
                         if (option == JOptionPane.OK_OPTION) {
                             b.deletePet(p);
                         }
+                        refreshUI();
                     }
                 });
         }
     }
 
-    public JMenu makeSubMenu(Pet p, String title) {
+    private JMenu makeSubMenu(Pet p, String title) {
         JFrame frame = this;
         JMenu childMenu = new JMenu(title);
         if (title.equals("Current Symptoms")) {

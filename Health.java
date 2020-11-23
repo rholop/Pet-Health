@@ -58,7 +58,7 @@ class Symptom implements java.io.Serializable {
         this.symptom = s;
     }
     public String toString() {
-        return "Symptom: " + symptom + " Date: " + myDate;
+        return "Symptom: " + symptom + "\n" + " Date: " + myDate;
     }
 }
 class UpdateHealthLog implements java.io.Serializable {

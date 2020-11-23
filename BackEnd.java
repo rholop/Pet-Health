@@ -58,4 +58,17 @@ public class BackEnd
     public void deletePet(Pet p) {
         pets.remove(p);
     }
+    
+    public void updatePetHealth(Pet p, String symptom) {
+        int x = pets.indexOf(p);
+        Pet petToUpdate = pets.get(x);
+        petToUpdate.log(symptom);
+    }
+    
+    public void updatePetHealth(Pet p, String date, String symptom) {
+        int x = pets.indexOf(p);
+        Pet petToUpdate = pets.remove(x);
+        petToUpdate.log(date, symptom);
+        pets.add(petToUpdate);
+    }
 }
