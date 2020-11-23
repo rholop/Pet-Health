@@ -4,14 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Deserialize {
-   List<Pet> petList = null;
-   
-   
    public List<Pet> run() {
       try {
          FileInputStream fileIn = new FileInputStream("/tmp/pet.ser");
          ObjectInputStream in = new ObjectInputStream(fileIn);
-         petList = (ArrayList<Pet>) in.readObject();
+         List<Pet> petList = (ArrayList<Pet>) in.readObject();
          in.close();
          fileIn.close();
          return petList;
@@ -21,9 +18,5 @@ public class Deserialize {
          System.out.println("Pet class not found");
          return null;
       }
-   }
-   
-   public List<Pet> getList() {
-       return petList;
    }
 }

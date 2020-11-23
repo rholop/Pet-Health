@@ -122,10 +122,8 @@ public class HomeScreen extends JFrame {
                         int option = JOptionPane.showConfirmDialog(null, fields, "Add New Pet", JOptionPane.OK_CANCEL_OPTION);
                         if (option == JOptionPane.OK_OPTION) {
                             Object selection = petDropDown.getSelectedItem();
-                            try {
-                                b.addPet(Functions.addPet(selection, name.getText(), birthday.getText()));
-                            }
-                            catch (Exception p) {
+                            boolean success = b.addPet(selection, name.getText(), birthday.getText());
+                            if (!success) {
                                 JOptionPane.showMessageDialog(null, "Error", "Invalid input", JOptionPane.PLAIN_MESSAGE);
                             }
                         }
