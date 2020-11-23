@@ -27,12 +27,12 @@ import java.text.ParseException;
  * @author rowanholop
  */
 
-public class HomeScreen extends JFrame {
+public class FrontEnd extends JFrame {
     BackEnd b;
     ImageIcon homeIcon;
     List<JButton> currentButtons;
 
-    public HomeScreen() {
+    public FrontEnd() {
         b = new BackEnd();
         b.loadData();
         currentButtons = new ArrayList<JButton>();
@@ -219,7 +219,7 @@ public class HomeScreen extends JFrame {
 
     public static void main(String[] args) {
         EventQueue.invokeLater(() -> {
-                var ex = new HomeScreen();
+                var ex = new FrontEnd();
                 ex.setVisible(true);
             });
     }
