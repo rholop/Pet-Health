@@ -2,6 +2,6 @@
 *.class
 *.ctxt
 *.iml
-package.bluej
+*.bluej
 ./out/*
 ./.idea/*
