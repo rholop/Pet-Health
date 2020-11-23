@@ -1,23 +1,23 @@
 import java.util.Date;
+import javax.swing.*;
 
 /**
  * Write a description of class Reptile here.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author rowanholop
+ * @version 11.22.2020
  */
-public class Reptile extends Pet
-{
-    String species;
-    
+public class Reptile extends Pet implements java.io.Serializable
+{    
     /**
      * Constructor for objects of class Reptile
      * 
      * @param name name of the Reptile
+     * @param Date birthday of pet
      */
-    public Reptile(String name, Date birthday, String species)
+    public Reptile(String name, Date birthday)
     {
         super(name, "Reptile", birthday);
-        this.species = species;
+        super.icon = new ImageIcon("icons/reptile.jpg");
     }
 }

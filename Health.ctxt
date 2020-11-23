@@ -1,0 +1,15 @@
+#BlueJ class context
+comment0.target=Health
+comment1.params=p
+comment1.target=Health(Pet)
+comment2.params=s\ type
+comment2.target=void\ addSymptom(java.lang.String,\ java.lang.String)
+comment3.params=s
+comment3.target=void\ addSymptom(Symptom)
+comment4.params=s
+comment4.target=void\ addSymptom(java.lang.String)
+comment5.params=
+comment5.target=java.util.List\ getHealth()
+comment6.params=
+comment6.target=java.lang.String\ toString()
+numComments=7
