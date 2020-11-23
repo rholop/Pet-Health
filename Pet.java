@@ -103,4 +103,12 @@ public abstract class Pet implements java.io.Serializable
     public ImageIcon getIcon() {
         return icon;
     }
+    /**
+     * Getter for pet's pet.
+     * 
+     * @return Health for this specific pet
+     */
+    public Health getHealth() {
+        return myHealth;
+    }
 }

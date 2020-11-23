@@ -4,12 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Deserialize {
-   List<Pet> petList;
-   boolean prevData;
+   List<Pet> petList = null;
    
-   public Deserialize() {
-       prevData = false;
-    }
    
    public List<Pet> run() {
       try {
@@ -18,7 +14,6 @@ public class Deserialize {
          petList = (ArrayList<Pet>) in.readObject();
          in.close();
          fileIn.close();
-         prevData = true;
          return petList;
       } catch (IOException i) {
          return null;
@@ -29,9 +24,6 @@ public class Deserialize {
    }
    
    public List<Pet> getList() {
-       if (prevData == false) {
-           return null;
-        }
        return petList;
    }
 }
