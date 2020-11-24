@@ -61,17 +61,3 @@ class Symptom implements java.io.Serializable {
         return "Symptom: " + symptom + "\n" + " Date: " + myDate;
     }
 }
-class UpdateHealthLog implements java.io.Serializable {
-    static void updateHealth(Pet p) {
-        try {
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Enter the symptom: ");
-        String symptom = sc.next();
-        sc.close();
-        p.log(symptom);
-        } 
-        catch(NoSuchElementException e) {
-            p.log("Healthy", "Okay");
-        }
-    }
-}
