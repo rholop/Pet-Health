@@ -1,6 +1,7 @@
 import java.util.Date;
 import java.util.Scanner;
 import javax.swing.*;
+import java.text.SimpleDateFormat;
 
 /**
  * Write a description of interface Pet here.
@@ -21,6 +22,7 @@ enum TypesOfPets {
 }
 public abstract class Pet implements java.io.Serializable
 {
+    SimpleDateFormat format = new SimpleDateFormat("MM-dd-yyyy");
     ImageIcon icon;
     String name;
     String type;
@@ -45,8 +47,13 @@ public abstract class Pet implements java.io.Serializable
      * @param data string that represents the symptom
      */
     public void log(String date, String data) {
-        Date myDate = new Date(date);
-        this.myHealth.addSymptom(new Symptom(data, myDate));
+        try {
+            Date myDate = format.parse(date);
+            this.myHealth.addSymptom(new Symptom(data, myDate));
+        }
+        catch (Exception e) {
+            this.myHealth.addSymptom(new Symptom(data));
+        }
     }
     /**
      * Overloaded to update the pet's health.

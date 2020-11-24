@@ -93,4 +93,9 @@ public class BackEnd
         int x = pets.indexOf(p);
         pets.get(x).log(date, symptom);
     }
+    
+    public void clearPetHealth(Pet p){
+        int x = pets.indexOf(p);
+        pets.get(x).clearHealth();
+    }
 }

@@ -134,9 +134,9 @@ public class FrontEnd extends JFrame {
         }
 
         JPopupMenu mainMenu = new JPopupMenu();
+        mainMenu.add(menuItem(key, "Add New Symptom"));
         mainMenu.add(makeSubMenu(key, "Current Symptoms"));
         mainMenu.add(menuItem(key, "All Symptoms"));
-        mainMenu.add(menuItem(key, "Add New Symptom"));
         mainMenu.add(menuItem(key, "Delete Pet"));
 
         button.addMouseListener(new MouseAdapter() 
@@ -213,6 +213,16 @@ public class FrontEnd extends JFrame {
                             }
                         }));
             }
+            childMenu.add(new JMenuItem(new AbstractAction("Clear All Symptoms") 
+                        {
+                            public void actionPerformed(ActionEvent e) {
+                                int option = JOptionPane.showConfirmDialog(null, "Are you sure you want to clear all this pet's symptoms?", "Clear All Symptom", JOptionPane.OK_CANCEL_OPTION);
+                                if (option == JOptionPane.OK_OPTION) {
+                                    b.clearPetHealth(p);
+                                }
+                                refreshUI();
+                            }
+                        }));
         }
         return childMenu;
     }
