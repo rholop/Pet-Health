@@ -273,7 +273,7 @@ public class FrontEnd extends JFrame {
     /**
      * Main method for running program.
      */
-    public static void main() {
+    public static void main(String[] args) {
         EventQueue.invokeLater(() -> {
                 var ex = new FrontEnd();
                 ex.setVisible(true);
