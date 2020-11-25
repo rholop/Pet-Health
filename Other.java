@@ -2,7 +2,7 @@ import java.util.Date;
 import javax.swing.*;
 
 /**
- * Write a description of class Other here.
+ * Any other type of pet, extends the pet class.
  *
  * @author rowanholop
  * @version 11.22.2020

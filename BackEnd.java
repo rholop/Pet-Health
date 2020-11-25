@@ -1,13 +1,12 @@
 import java.util.*;
 
 /**
- * Backend storage and maintenance for the PetHealth application.
+ * Backend storage and maintenance for the PetHealth application. Facade-ish.
  *
  * @author rowanholop
  * @version 11.23.2020
  */
-public class BackEnd
-{
+public class BackEnd {
     List<Pet> pets;
     /**
      * Constructor for objects of class BackEnd
@@ -16,8 +15,6 @@ public class BackEnd
     {
         pets = new ArrayList<Pet>();
     }
-    
-    
     /**
      * Populates data by deserialzing.
      */
@@ -28,7 +25,6 @@ public class BackEnd
             }
         }
     }
-    
     /**
      * Facade implementation.
      * 
@@ -44,7 +40,6 @@ public class BackEnd
             return false;
         }
     }
-    
     /**
      * Return the current list of pets.
      * 
@@ -53,15 +48,13 @@ public class BackEnd
     public List<Pet> getPets() {
         return pets;
     }
-
     /**
-     * Facade implementation for closing the window.
+     * Facade implementation for closing the window. Seralizes the data to a local file.
      */
     public void close()
     {
         Functions.serialize(pets);
     }
-    
     /**
      * Facade implementation.
      * 
@@ -70,7 +63,6 @@ public class BackEnd
     public void deletePet(Pet p) {
         pets.remove(p);
     }
-    
     /**
      * Facade implementation.
      * 
@@ -81,7 +73,6 @@ public class BackEnd
         int x = pets.indexOf(p);
         pets.get(x).log(symptom);
     }
-    
     /**
      * Facade implementation.
      * 
@@ -93,7 +84,11 @@ public class BackEnd
         int x = pets.indexOf(p);
         pets.get(x).log(date, symptom);
     }
-    
+    /**
+     * Facade implementation.
+     * 
+     * @param Pet pet whose health should be cleeared
+     */
     public void clearPetHealth(Pet p){
         int x = pets.indexOf(p);
         pets.get(x).clearHealth();

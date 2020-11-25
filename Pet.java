@@ -1,10 +1,9 @@
 import java.util.Date;
 import java.util.Scanner;
 import javax.swing.*;
-import java.text.SimpleDateFormat;
 
 /**
- * Write a description of interface Pet here.
+ * Abstract class for all of our pet objects.
  *
  * @author rowanholop
  * @author melaniemccord
@@ -22,7 +21,6 @@ enum TypesOfPets {
 }
 public abstract class Pet implements java.io.Serializable
 {
-    SimpleDateFormat format = new SimpleDateFormat("MM-dd-yyyy");
     ImageIcon icon;
     String name;
     String type;
@@ -47,13 +45,7 @@ public abstract class Pet implements java.io.Serializable
      * @param data string that represents the symptom
      */
     public void log(String date, String data) {
-        try {
-            Date myDate = format.parse(date);
-            this.myHealth.addSymptom(new Symptom(data, myDate));
-        }
-        catch (Exception e) {
-            this.myHealth.addSymptom(new Symptom(data));
-        }
+        myHealth.addSymptom(data, date);
     }
     /**
      * Overloaded to update the pet's health.
@@ -61,7 +53,7 @@ public abstract class Pet implements java.io.Serializable
      * @param data string that represents the symptom
      */
     public void log(String data) {
-        this.myHealth.addSymptom(new Symptom(data));
+        myHealth.addSymptom(data);
     }
     /**
      * Reset the pet's health.

@@ -2,7 +2,7 @@ import java.util.Date;
 import javax.swing.*;
 
 /**
- * Write a description of class Ferret here.
+ * Ferret class that extends the pet class.
  *
  * @author rowanholop
  * @version 11.22.2020

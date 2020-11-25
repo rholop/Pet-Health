@@ -22,9 +22,10 @@ import javax.swing.Icon;
 import java.text.ParseException;
 
 /**
- * Home screen class.
+ * Home screen class. Offers a facade client application.
  * 
  * @author rowanholop
+ * @version 11.22.2020
  */
 
 public class FrontEnd extends JFrame {
@@ -32,16 +33,21 @@ public class FrontEnd extends JFrame {
     ImageIcon homeIcon;
     List<JButton> currentButtons;
 
+    /**
+     * Constructor method. Creates the BackEnd object, loads the data, and creates home icome, calls the initializing function for the UI.
+     */
     public FrontEnd() {
         b = new BackEnd();
         b.loadData();
         currentButtons = new ArrayList<JButton>();
         homeIcon = new ImageIcon("icons/home.jpg");
         initUI();
-    }
-
+    }   
+    /**
+     * Initliazes the user interface.
+     */
     private void initUI() {
-        updateButtons(b.getPets());
+        getButtons(b.getPets()); // 
         createLayout();
         setIconImage(homeIcon.getImage());
 
@@ -51,10 +57,13 @@ public class FrontEnd extends JFrame {
 
         addWindowListener(new WindowAdapter() {
                 public void windowClosing(WindowEvent e) {
-                    b.close();
+                    b.close();  // Calls the backEnd method to serialize data to a local file.
                 }
             });
     }
+    /**
+     * Creates the layout initially. Sets some defaults for layout.
+     */
     private void createLayout() {
         var pane = getContentPane();
         var gl = new GroupLayout(pane);
@@ -62,36 +71,49 @@ public class FrontEnd extends JFrame {
         setLayout(new FlowLayout());
         placeButtons();
     }
+    /**
+     * Places button in frame.
+     */
     private void placeButtons() {
         for (JButton b : currentButtons) {
             add ( b );
         }
-        pack();
+        pack();  // Resizes screen
     }
+    /**
+     * Refreshes the user interface - specifically the buttons in the layout.
+     */
     private void refreshUI() {
         for (JButton b : currentButtons) {
             remove ( b );
         }
-        updateButtons(b.getPets());
+        getButtons(b.getPets());
         placeButtons();
     }
-    private void updateButtons(List<Pet> pets){
-        currentButtons.clear();
+    /**
+     * Populates/updates the locally stored button objects.
+     * 
+     * @param List<Pet> list of pets to create/update the buttons.
+     */
+    private void getButtons(List<Pet> pets){
+        currentButtons.clear();  // Clear locally stored buttons
         Map<Pet,Icon> buttons = new LinkedHashMap<Pet,Icon>(pets.size());
-        Font plainFont = new Font("Helvetica", Font.PLAIN, 24);
+        Font plainFont = new Font("Helvetica", Font.PLAIN, 24);  // Formatting
 
-        for (Pet pet: pets) {
+        for (Pet pet: pets) {  // Create the pet specific buttons
             CompoundIcon icon = new CompoundIcon(CompoundIcon.Axis.Y_AXIS,
                     pet.getIcon(),
                     new TextIcon(new JButton(), pet.getName(), plainFont));
             buttons.put(pet, icon);
         }
 
+        // Create the button for adding a pet
         CompoundIcon icon = new CompoundIcon(CompoundIcon.Axis.Y_AXIS,
                 new ImageIcon("icons/plus.jpg"),
                 new TextIcon(new JButton(), "Add New Pet", plainFont));
         buttons.put(null, icon);
         
+        // Call the method to make submenus/clickable actions for each button and add them to the locally stored list
         Iterator iconIterator = buttons.entrySet().iterator();
         while (iconIterator.hasNext()) { 
             Map.Entry<Pet, Icon> pair = (Map.Entry)iconIterator.next(); 
@@ -103,9 +125,18 @@ public class FrontEnd extends JFrame {
         } 
     }
 
+    /**
+     * Create the menus for buttons.
+     * 
+     * @param JButton the button to add menus to
+     * @param Pet the pet's information for creating menus
+     */
     private void makeButtonMenus(JButton button, Pet key) {
         JFrame frame = this;
 
+        /**
+         * If the button isn't for a pet, create some information for that specfically (the add new pet button).
+         */
         if (key == null) {
             JTextField name = new JTextField();
             JTextField birthday = new JTextField();
@@ -146,7 +177,13 @@ public class FrontEnd extends JFrame {
                 }
             });
     }
-
+    /**
+     * Create JMenuItem Objects to support the makeButton method.
+     * 
+     * @param Pet for this button's menu
+     * @param String title for this menu
+     * @return JMenuItem for button
+     */
     private JMenuItem menuItem(Pet p, String title){
         JFrame frame = this;
         if (title.equals("All Symptoms")) {
@@ -200,7 +237,13 @@ public class FrontEnd extends JFrame {
                 });
         }
     }
-
+    /**
+     * Create JMenu Objects to support the makeButton method.
+     * 
+     * @param Pet for this button's menu
+     * @param String title for this menu
+     * @return JMenu for button
+     */
     private JMenu makeSubMenu(Pet p, String title) {
         JFrame frame = this;
         JMenu childMenu = new JMenu(title);
@@ -227,7 +270,10 @@ public class FrontEnd extends JFrame {
         return childMenu;
     }
 
-    public static void main(String[] args) {
+    /**
+     * Main method for running program.
+     */
+    public static void main() {
         EventQueue.invokeLater(() -> {
                 var ex = new FrontEnd();
                 ex.setVisible(true);

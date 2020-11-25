@@ -1,3 +1,7 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.io.*;
 
 /**
  * Functions required for operating the backend.
@@ -6,12 +10,16 @@
  * @author rowanholop
  * @version (a version number or a date)
  */
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.*;
-import java.io.*;
 
 public class Functions {
+    /**
+     * Factory-esque method for the creation of pet objects.
+     * 
+     * @param petType type of the pet
+     * @param String name of the pet
+     * @param String date of the pet's birthday
+     * @return Pet the new pet created
+     */
     public static Pet addPet(Object petType, String name, String date) throws ParseException {
         Pet myPet;
         SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yy");
@@ -45,7 +53,11 @@ public class Functions {
         }
         return myPet;
     }
-
+    /**
+     * Method to deserialize data from the file.
+     * 
+     * @return List<Pet> of the pets deserialized.
+     */
     public static List<Pet> deserialize() {
         try {
             FileInputStream fileIn = new FileInputStream("/tmp/pet.ser");
@@ -61,7 +73,11 @@ public class Functions {
             return null;
         }
     }
-
+    /**
+     * Method to serialize data to the file.
+     * 
+     * @param List<Pet> pets to serialize.
+     */
     public static void serialize(List<Pet> petList) {
         try {
             FileOutputStream fileOut =
@@ -75,5 +91,4 @@ public class Functions {
             i.printStackTrace();
         }
     }
-
 }
