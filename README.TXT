@@ -14,23 +14,28 @@ USER INSTRUCTIONS:
 3. Run main from FrontEnd.java
 
 This Directory contains:
-- BackEnd.java - Backend implementation for this project.
-- Bird.java - Pet class
-- Cat.java - Pet class
-- CompoundIcon.java - source: http://www.camick.com/java/source/CompoundIcon.java
-- Dog.java - Pet class
-- Ferret.java - Pet class
-- Fish.java - Pet class
-- FrontEnd.java - Frontend implementation for this project.
-- Functions.java - Class which contains static methods for this project.
-- Health.java - Health object
 - icons - directory containing jpgs for each pet
-- Other.java - Pet class
-- package.bluej - BlueJ implementation for running within BlueJ
-- Pet.java - Abstract pet class
-- Rabbit.java - Pet class
-- README.TXT - This file
-- Reptile.java - Pet class
-- TextIcon.java - source: http://www.camick.com/java/source/TextIcon.java
+- PetHealth.jar - jar file for running this software
+- Presentation.pptx - final presentation document
+- README.TXT - this file
+- SampleIO.mov - sample screen recording of software.
+- SourceCode:
+	- BackEnd.java - Backend implementation for this project.
+	- Bird.java - Pet class
+	- Cat.java - Pet class
+	- CompoundIcon.java - source: http://www.camick.com/java/source/CompoundIcon.java
+	- Dog.java - Pet class
+	- Ferret.java - Pet class
+	- Fish.java - Pet class
+	- FrontEnd.java - Frontend implementation for this project.
+	- Functions.java - Class which contains static methods for this project.
+	- Health.java - Health object
+	- icons - directory containing jpgs for each pet
+	- Other.java - Pet class
+	- package.bluej - BlueJ implementation for running within BlueJ
+	- Pet.java - Abstract pet class
+	- Rabbit.java - Pet class
+	- Reptile.java - Pet class
+	- TextIcon.java - source: http://www.camick.com/java/source/TextIcon.java
 
 
